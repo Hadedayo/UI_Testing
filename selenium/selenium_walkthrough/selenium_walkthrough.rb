@@ -2,6 +2,8 @@ require 'selenium-webdriver'
 
 class SeleniumQAToolsForm
 
+  attr_accessor :first_name_field
+
   def initialize
     @chrome_driver = Selenium::WebDriver.for :chrome
     @practice_form_url = 'http://toolsqa.com/automation-practice-form/'
@@ -24,6 +26,10 @@ class SeleniumQAToolsForm
 
   def visit_practice_form
     @chrome_driver.get(@practice_form_url)
+  end
+
+  def get_current_url
+    @chrome_driver.current_url
   end
 
   def input_firstname_field(text)
@@ -67,16 +73,16 @@ class SeleniumQAToolsForm
   end
 
 end
-
-test = SeleniumQAToolsForm.new
-test.visit_practice_form
-test.input_firstname_field('Hassanat')
-test.input_lastname_field('Ade')
-test.select_gender
-test.select_years_of_experience
-test.select_profession
-test.input_date_field('05/12/2018')
-test.select_automation_tool
-test.select_continents
-test.select_selenium_commands
-sleep 5
+#
+# test = SeleniumQAToolsForm.new
+# test.visit_practice_form
+# test.input_firstname_field('Hassanat')
+# test.input_lastname_field('Ade')
+# test.select_gender
+# test.select_years_of_experience
+# test.select_profession
+# test.input_date_field('05/12/2018')
+# test.select_automation_tool
+# test.select_continents
+# test.select_selenium_commands
+# sleep 5
