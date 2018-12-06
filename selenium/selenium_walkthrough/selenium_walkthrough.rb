@@ -15,8 +15,6 @@ class SeleniumQAToolsForm
     @date_field = 'datepicker'
     @profession_manual_tester_field = 'profession-0'
     @profession_automation_tester_field = 'profession-1'
-    @automation_tool_qtp_field = 'tool-0'
-    @automation_tool_Selenium_IDE_field = 'tool-1'
     @automation_tool_Selenium_Webdriver_field = 'tool-2'
     @dropDown_continents_field = 'continents'
     @dropdown_commands_field = 'selenium_commands'
@@ -36,53 +34,85 @@ class SeleniumQAToolsForm
     @chrome_driver.find_element(:name, @first_name_field).send_keys(text)
   end
 
+  def get_firstname_field
+    @chrome_driver.find_element(:name, @first_name_field).attribute('value')
+  end
+
   def input_lastname_field(text)
     @chrome_driver.find_element(:name, @last_name_field).send_keys(text)
   end
 
-    def select_gender
+  def get_lastname_field
+    @chrome_driver.find_element(:name, @last_name_field).attribute('value')
+  end
+
+  def select_gender
     @chrome_driver.find_element(:id, @sex_female_field).click
+  end
+
+  def is_gender_selected
+    @chrome_driver.find_element(:id, @sex_female_field).selected?
   end
 
   def select_years_of_experience
     @chrome_driver.find_element(:id, @years_of_experience_5_field).click
   end
 
-  def select_profession
-    @chrome_driver.find_element(:id, @profession_automation_tester_field).click
+  def is_years_of_experience_selected
+    @chrome_driver.find_element(:id, @years_of_experience_5_field).selected?
   end
 
   def input_date_field(text)
     @chrome_driver.find_element(:id, @date_field).send_keys(text)
   end
 
-  def select_automation_tool
-    @chrome_driver.find_element(:id, @automation_tool_Selenium_IDE_field).click
+  def get_date_field
+    @chrome_driver.find_element(:id, @date_field).attribute('value')
   end
 
-  def select_continents
+  def select_profession
+    @chrome_driver.find_element(:id, @profession_automation_tester_field).click
+  end
+
+  def is_profession_selected
+    @chrome_driver.find_element(:id, @profession_automation_tester_field).selected?
+  end
+
+  def select_automation_tool
+    @chrome_driver.find_element(:id, @automation_tool_Selenium_Webdriver_field).click
+  end
+
+  def is_automation_tool_selected
+    @chrome_driver.find_element(:id, @automation_tool_Selenium_Webdriver_field).selected?
+  end
+
+  def select_continent_from_dropdown
     dropDownMenu = @chrome_driver.find_element(:id, @dropDown_continents_field)
     option = Selenium::WebDriver::Support::Select.new(dropDownMenu)
     option.select_by(:text, 'Africa')
   end
 
-  def select_selenium_commands
+  def get_selected_continent_from_dropdown
+    dropDownMenu = @chrome_driver.find_element(:id, @dropDown_continents_field).text.include?('Africa')
+  end
+
+
+  def select_selenium_commands_from_dropdown
     dropDownMenu = @chrome_driver.find_element(:id, @dropdown_commands_field)
     option = Selenium::WebDriver::Support::Select.new(dropDownMenu)
     option.select_by(:text, 'Wait Commands')
   end
 
+  def get_selected_selenium_command_from_dropdown
+    dropDownMenu = @chrome_driver.find_element(:id, @dropdown_commands_field).text.include?('Wait Commands')
+  end
+
+  def click_to_submit_form
+    @chrome_driver.find_element(:name, 'submit').click
+  end
+
+  def is_submit_clicked
+    @chrome_driver.find_element(:name, 'submit').submit
+  end
+
 end
-#
-# test = SeleniumQAToolsForm.new
-# test.visit_practice_form
-# test.input_firstname_field('Hassanat')
-# test.input_lastname_field('Ade')
-# test.select_gender
-# test.select_years_of_experience
-# test.select_profession
-# test.input_date_field('05/12/2018')
-# test.select_automation_tool
-# test.select_continents
-# test.select_selenium_commands
-# sleep 5
